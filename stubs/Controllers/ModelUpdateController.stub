@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Controllers\V1\**Model**;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\**Model**\**Model**UpdateRequest;
+use App\Http\Resources\Api\V1\**Model**\**Model**Resource;
+use App\Interfaces\Repositories\**Model**Repository;
+use App\Models\**Model**;
+
+class **Model**UpdateController extends Controller
+{
+    public function __construct(private **Model**Repository $**modelCamel**Repository)
+    {
+        $this->resourceItem = **Model**Resource::class;
+    }
+
+    public function __invoke(**Model**UpdateRequest $request, **Model** $**modelCamel**): **Model**Resource
+    {
+        $**modelCamel** = $this->**modelCamel**Repository->update($**modelCamel**, $request->all());
+
+        return $this->respondWithItem($**modelCamel**);
+    }
+}

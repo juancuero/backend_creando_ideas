@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Controllers\V1\**Model**;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\V1\**Model**\**Model**Collection;
+use App\Interfaces\Repositories\**Model**Repository;
+use Illuminate\Http\Request;
+
+class **Model**IndexController extends Controller
+{
+    public function __construct(private **Model**Repository $**modelCamel**Repository)
+    {
+        $this->resourceCollection = **Model**Collection::class;
+    }
+
+    public function __invoke(Request $request): **Model**Collection
+    {
+        $data = $this->**modelCamel**Repository->all();
+
+        return $this->respondWithList($data);
+    }
+}

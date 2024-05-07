@@ -1,0 +1,20 @@
+<?php
+
+use App\Http\Controllers\V1\**Model**\**Model**CreateController;
+use App\Http\Controllers\V1\**Model**\**Model**DeleteController;
+use App\Http\Controllers\V1\**Model**\**Model**IndexController;
+use App\Http\Controllers\V1\**Model**\**Model**PaginateController;
+use App\Http\Controllers\V1\**Model**\**Model**ShowController;
+use App\Http\Controllers\V1\**Model**\**Model**UpdateController;
+use Illuminate\Support\Facades\Route;
+
+Route::group([
+    'middleware' => ['jwt.verify'],
+], function () {
+    Route::post('/', **Model**CreateController::class)->name('create-**modelKebab**');
+    Route::get('/', **Model**IndexController::class)->name('read-**modelKebab**.list');
+    Route::get('/paginate', **Model**PaginateController::class)->name('read-**modelKebab**.paginate');
+    Route::get('/{**modelCamel**}', **Model**ShowController::class)->name('read-**modelKebab**.show');
+    Route::patch('/{**modelCamel**}', **Model**UpdateController::class)->name('update-**modelKebab**');
+    Route::delete('/{**modelCamel**}', **Model**DeleteController::class)->name('delete-**modelKebab**');
+});

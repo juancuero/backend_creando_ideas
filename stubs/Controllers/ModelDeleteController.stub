@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\V1\**Model**;
+
+use App\Http\Controllers\Controller;
+use App\Interfaces\Repositories\**Model**Repository;
+use App\Models\**Model**;
+use Illuminate\Http\Request;
+
+class **Model**DeleteController extends Controller
+{
+    public function __construct(private **Model**Repository $**modelCamel**Repository)
+    {
+    }
+
+    public function __invoke(Request $request, **Model** $**modelCamel**)
+    {
+        $this->**modelCamel**Repository->deleteById($**modelCamel**->id);
+
+        return $this->respondWithNoContent();
+    }
+}

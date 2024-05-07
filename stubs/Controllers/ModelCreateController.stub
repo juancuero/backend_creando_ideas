@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Controllers\V1\**Model**;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\**Model**\**Model**CreateRequest;
+use App\Http\Resources\Api\V1\**Model**\**Model**Resource;
+use App\Interfaces\Repositories\**Model**Repository;
+
+class **Model**CreateController extends Controller
+{
+    public function __construct(private **Model**Repository $**modelCamel**Repository)
+    {
+        $this->resourceItem = **Model**Resource::class;
+    }
+
+    public function __invoke(**Model**CreateRequest $request): **Model**Resource
+    {
+        $**modelCamel** = $this->**modelCamel**Repository->store($request->all());
+
+        return $this->respondWithItem($**modelCamel**);
+    }
+}
